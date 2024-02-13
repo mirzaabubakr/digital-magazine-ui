@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import magazineSlice from "./magazine/magazineSlice";
+import MagazinesReducer from "./magazine/magazineSlice";
+
 export const store = configureStore({
   reducer: {
-    magazines: magazineSlice,
+    magazines: MagazinesReducer,
   },
-  middleware: (getDefaultMiddleware: any) =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       immutableCheck: false,
       serializableCheck: false,
@@ -13,7 +14,7 @@ export const store = configureStore({
 });
 
 const rootReducer = combineReducers({
-  magazines: magazineSlice,
+  magazines: MagazinesReducer,
 });
 
 export type RootState = ReturnType<typeof store.getState>;
