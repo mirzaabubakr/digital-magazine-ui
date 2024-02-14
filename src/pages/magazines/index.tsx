@@ -47,6 +47,7 @@ export default function Magazines() {
 
   const handlePageChange = useCallback(
     (event: React.ChangeEvent<unknown>, newPage: number) => {
+      console.log(event);
       setPageCount(newPage);
     },
     []
@@ -104,11 +105,7 @@ export default function Magazines() {
                       justifyContent="center"
                       alignItems="center"
                     >
-                      {magazines.length === 0 ? (
-                        <Typography variant="h5">{"No Data Found!"}</Typography>
-                      ) : (
-                        <CircularProgress />
-                      )}
+                      <CircularProgress />
                     </Grid>
                   )}
 
