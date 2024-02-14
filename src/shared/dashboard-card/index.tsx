@@ -1,4 +1,3 @@
-import { useTheme } from "@mui/material/styles";
 import { Card, CardContent, Typography, Stack, Box } from "@mui/material";
 
 type Props = {
@@ -24,8 +23,6 @@ const DashboardCard = ({
   headsubtitle,
   middlecontent,
 }: Props) => {
-  const theme = useTheme();
-
   return (
     <Card
       sx={{
@@ -42,7 +39,7 @@ const DashboardCard = ({
           </Typography>
         </CardContent>
       ) : (
-        <CardContent sx={{ p: "30px" }}>
+        <CardContent sx={{ p: "20px" }}>
           {title ? (
             <Stack
               direction="row"

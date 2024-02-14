@@ -1,5 +1,4 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
@@ -36,7 +35,7 @@ export default function MainApp() {
   return (
     <div style={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar component="nav" position="fixed" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -47,7 +46,12 @@ export default function MainApp() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography
+            variant="h6"
+            fontWeight={"bold"}
+            color={"ActiveBorder"}
+            noWrap
+          >
             {"Digital Magazine"}
           </Typography>
         </Toolbar>

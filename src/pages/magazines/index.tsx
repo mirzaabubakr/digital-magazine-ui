@@ -3,16 +3,12 @@ import DashboardCard from "../../shared/dashboard-card";
 import BlankCard from "../../shared/blank-card";
 import {
   Box,
-  Button,
   CardContent,
-  CardMedia,
-  Chip,
   CircularProgress,
   Grid,
   MenuItem,
   Pagination,
   SelectChangeEvent,
-  Stack,
   Typography,
 } from "@mui/material";
 import CustomSelect from "../../components/custom-select";
@@ -22,6 +18,7 @@ import {
   fetchMagazines,
   updateMagazines,
 } from "../../store/magazine/magazineSlice";
+import MagazineCard from "../../components/magazine-card";
 
 export default function Magazines() {
   const dispatch = useDispatch();
@@ -50,6 +47,7 @@ export default function Magazines() {
 
   const handlePageChange = useCallback(
     (event: React.ChangeEvent<unknown>, newPage: number) => {
+      console.log(event);
       setPageCount(newPage);
     },
     []
@@ -93,92 +91,11 @@ export default function Magazines() {
                   {magazines && magazines.length > 0 ? (
                     <Grid container spacing={3} border={0} marginTop={2}>
                       {magazines.map((magazine, index) => (
-                        <Grid
+                        <MagazineCard
                           key={index}
-                          item
-                          lg={3}
-                          md={6}
-                          sm={6}
-                          minWidth={"absolute"}
-                        >
-                          <BlankCard className="hoverCard">
-                            <>
-                              <CardMedia
-                                component="img"
-                                height="240"
-                                image={magazine.imgUrl}
-                                alt={magazine.title}
-                              />
-                              <CardContent>
-                                <Stack
-                                  direction="row"
-                                  sx={{ marginTop: "-45px" }}
-                                >
-                                  <Chip
-                                    sx={{
-                                      marginLeft: "auto",
-                                      marginTop: "-200px",
-                                      backgroundColor: "white",
-                                    }}
-                                    label={`${magazine.price} $`}
-                                    size="small"
-                                  />
-                                </Stack>
-                                <Box marginTop={4}>
-                                  <Typography
-                                    gutterBottom
-                                    variant="h5"
-                                    color="inherit"
-                                    sx={{ textDecoration: "none" }}
-                                  >
-                                    {magazine.title}
-                                  </Typography>
-                                </Box>
-                                <Box sx={{ marginTop: 2 }}>
-                                  <Typography
-                                    sx={{
-                                      fontSize: 20,
-                                      color: "#1162b7",
-                                      fontWeight: "bold",
-                                    }}
-                                  >
-                                    {magazine.description}
-                                  </Typography>
-                                </Box>
-                                <Box sx={{ marginTop: 3 }}>
-                                  <Stack
-                                    direction="row"
-                                    gap={3}
-                                    alignItems="center"
-                                    justifyContent={"space-between"}
-                                    marginTop={2}
-                                    marginBottom={1}
-                                  >
-                                    <Button
-                                      fullWidth
-                                      variant="outlined"
-                                      onClick={() =>
-                                        handleSubscribe(
-                                          magazine.id,
-                                          magazine.subscribed
-                                        )
-                                      }
-                                      color={
-                                        magazine.subscribed
-                                          ? "error"
-                                          : "success"
-                                      }
-                                    >
-                                      {magazine.subscribed
-                                        ? "Unsubscribe"
-                                        : "Subscribe"}
-                                    </Button>
-                                  </Stack>
-                                </Box>
-                              </CardContent>
-                            </>
-                          </BlankCard>
-                        </Grid>
+                          magazine={magazine}
+                          handleSubscribe={handleSubscribe}
+                        />
                       ))}
                     </Grid>
                   ) : (
@@ -188,11 +105,7 @@ export default function Magazines() {
                       justifyContent="center"
                       alignItems="center"
                     >
-                      {magazines.length === 0 ? (
-                        <Typography variant="h5">{"No Data Found!"}</Typography>
-                      ) : (
-                        <CircularProgress />
-                      )}
+                      <CircularProgress />
                     </Grid>
                   )}
 
